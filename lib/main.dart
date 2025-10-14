@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_d7/tugas1_flutter/tugas1.dart';
+import 'package:flutter_d7/tugas1_flutter/tugas2_flutter.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,11 +10,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Tugas 1 Flutter',
+      title: 'Tugas 2 Flutter',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.greenAccent),
       ),
-      home: Tugas1(),
+      home: Tugas2(),
     );
   }
 }
