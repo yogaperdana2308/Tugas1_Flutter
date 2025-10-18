@@ -17,6 +17,14 @@ class _Tugas5State extends State<Tugas5> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          setState(() {
+            counter--;
+          });
+        },
+        child: Icon(Icons.add),
+      ),
       backgroundColor: const Color(0xffFBF9D1),
       appBar: AppBar(
         title: Text(
@@ -25,39 +33,11 @@ class _Tugas5State extends State<Tugas5> {
         ),
         backgroundColor: Color(0xff9A3F3F),
       ),
-      floatingActionButton: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        spacing: 15,
-        children: [
-          FloatingActionButton(
-            backgroundColor: Color(0xff9A3F3F),
-            onPressed: () {
-              setState(() {
-                counter++;
-              });
-            },
-            child: Icon(Icons.add, color: Color.fromARGB(255, 255, 255, 255)),
-          ),
-          FloatingActionButton(
-            backgroundColor: Color(0xff9A3F3F),
-            onPressed: () {
-              setState(() {
-                counter--;
-              });
-            },
-            child: Icon(
-              Icons.remove,
-              color: const Color.fromARGB(255, 255, 255, 255),
-            ),
-          ),
-        ],
-      ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(height: 24),
             if (showName) ...[
               Text(
                 "Yoga Perdana Ferdiansyah",
@@ -67,7 +47,7 @@ class _Tugas5State extends State<Tugas5> {
                   color: const Color.fromARGB(255, 0, 0, 0),
                 ),
               ),
-              SizedBox(height: 8),
+              SizedBox(height: 4),
               TextButton(
                 onPressed: () {
                   print("Tampilkan Nama : $showName");
@@ -97,18 +77,15 @@ class _Tugas5State extends State<Tugas5> {
                 color: Colors.red,
               ),
             ),
-            Text(showFavorite ? "Love You!! <3" : " "),
-
-            //Nomor 3
+            Text(showFavorite ? "Disukai" : " "),
             SizedBox(
               child: Column(
                 children: [
                   Text(
                     showAll
-                        ? 'Barang siapa yang bersungguh-sungguh pasti akan berhasil!!!'
+                        ? 'inilsjdksjdgkjhsbkgjhbsd skhfdbgkhsfkhbsdkghjbsdkgjhsbdkdf sfglnsdgnsjdfngsfg sdfkjhsdfjlhsdf'
                         : '    ',
                     maxLines: 3,
-                    textAlign: TextAlign.center,
                   ),
                   TextButton(
                     onPressed: () {
@@ -128,9 +105,7 @@ class _Tugas5State extends State<Tugas5> {
               ),
             ),
 
-            //Nomor 5
             InkWell(
-              splashColor: Colors.black,
               onTap: () {
                 print('Kotak Sentuh');
                 setState(() {
@@ -138,8 +113,7 @@ class _Tugas5State extends State<Tugas5> {
                 });
               },
               child: Container(
-                padding: EdgeInsets.all(8),
-                width: 300,
+                width: double.infinity,
                 height: 100,
                 color: Color(0xffE6CFA9),
                 child: Center(
@@ -153,8 +127,6 @@ class _Tugas5State extends State<Tugas5> {
                 ),
               ),
             ),
-
-            //Nomor 6
             SizedBox(height: 100),
             GestureDetector(
               onDoubleTap: () {
@@ -175,7 +147,7 @@ class _Tugas5State extends State<Tugas5> {
                   counter1++;
                 });
               },
-              child: Text('Ayo Tekan Aku'),
+              child: Text('Tekan Aku'),
             ),
             Center(child: Text('Jumlahnya : $counter1')),
           ],

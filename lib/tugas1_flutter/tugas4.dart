@@ -29,9 +29,7 @@ class Tugas4 extends StatelessWidget {
                 ),
                 TextField(
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(25),
-                    ),
+                    border: OutlineInputBorder(),
                     hintText: "Masukkan Nama Anda ..... ",
                   ),
                 ),
@@ -40,11 +38,10 @@ class Tugas4 extends StatelessWidget {
                   "E-mail",
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
+
                 TextField(
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(25),
-                    ),
+                    border: OutlineInputBorder(),
                     hintText: "Masukkan E-mail Anda ..... ",
                   ),
                 ),
@@ -55,9 +52,7 @@ class Tugas4 extends StatelessWidget {
                 ),
                 TextField(
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(25),
-                    ),
+                    border: OutlineInputBorder(),
                     hintText: "Masukkan No-Hp Anda ..... ",
                   ),
                 ),
@@ -71,9 +66,7 @@ class Tugas4 extends StatelessWidget {
                   // minLines: 1,
                   // expands: true,
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(25),
-                    ),
+                    border: OutlineInputBorder(),
                     hintText: " ..... ",
                   ),
                 ),
