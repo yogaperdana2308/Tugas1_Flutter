@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_d7/tugas1_flutter/tugas5.dart';
+import 'package:flutter_d7/tugas1_flutter/slicingfigma.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,11 +10,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Tugas 5 Flutter',
+      title: 'Slicing Figma',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.greenAccent),
       ),
-      home: Tugas5(),
+      home: Slicingfigma(),
     );
   }
 }
