@@ -27,8 +27,8 @@ class InputAkun extends StatelessWidget {
                 onPressed: whenPress,
                 // icon: lambang ?? SizedBox(),
                 icon: obscurePass
-                    ? Icon(Icons.visibility_off_outlined)
-                    : Icon(Icons.visibility_outlined),
+                    ? Icon(Icons.visibility_off_outlined, size: 16)
+                    : Icon(Icons.visibility_outlined, size: 16),
               )
             : null,
       ),

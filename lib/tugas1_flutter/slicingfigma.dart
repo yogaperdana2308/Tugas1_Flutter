@@ -150,7 +150,8 @@ class _SlicingfigmaState extends State<Slicingfigma> {
                             ),
                             Text('Remember me', style: TextStyle(fontSize: 12)),
                             Spacer(),
-                            GestureDetector(
+                            TextButton(
+                              onPressed: () {},
                               child: Text(
                                 'Forgot Password ?',
                                 style: TextStyle(
@@ -167,7 +168,7 @@ class _SlicingfigmaState extends State<Slicingfigma> {
                   ],
                 ),
               ),
-              SizedBox(height: 2),
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -175,8 +176,8 @@ class _SlicingfigmaState extends State<Slicingfigma> {
                     'Dont have an account?',
                     style: TextStyle(color: Colors.grey),
                   ),
-                  SizedBox(width: 8),
-                  GestureDetector(
+                  TextButton(
+                    onPressed: () {},
                     child: Text(
                       'Sign Up',
                       style: TextStyle(
