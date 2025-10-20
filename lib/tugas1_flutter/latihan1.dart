@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_d7/tugas1_flutter/custom_login_button.dart';
 
 class Latihan1 extends StatefulWidget {
   const Latihan1({super.key});
@@ -26,44 +27,32 @@ class _Latihan1State extends State<Latihan1> {
         ),
         backgroundColor: Color(0xff9A3F3F),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        spacing: 8,
-        children: [
-          SizedBox(height: 72, width: double.infinity),
-          Text(
-            'Login',
-            style: TextStyle(
-              color: Color.fromARGB(255, 0, 0, 0),
-              fontSize: 36,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
+      body: Center(
+        child: Container(
+          height: 400,
+          width: 300,
+          color: Colors.white,
+          padding: EdgeInsets.all(24),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            spacing: 8,
             children: [
-              Icon(
-                Icons.door_back_door_outlined,
-                color: Color.fromARGB(255, 255, 0, 0),
+              CustomLoginButton(
+                label: 'Masuk ke Tugas 5',
+                onPress: () {
+                  Navigator.pushNamed(context, '/tugas5');
+                },
               ),
-              Text(
-                'Silahkan Login',
-                style: TextStyle(
-                  color: Color.fromARGB(255, 0, 0, 0),
-                  fontSize: 19,
-                ),
+              SizedBox(height: 12),
+              CustomLoginButton(
+                label: 'Masuk ke Tugas 4',
+                onPress: () {
+                  Navigator.pushNamed(context, '/tugas4');
+                },
               ),
             ],
           ),
-          Text(
-            '"Jadilah Manusia Yang Berguna"',
-            style: TextStyle(
-              color: Color.fromARGB(255, 0, 0, 0),
-              fontSize: 18,
-              fontStyle: FontStyle.italic,
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }

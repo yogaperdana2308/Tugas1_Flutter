@@ -4,18 +4,20 @@ class CustomLoginButton extends StatelessWidget {
   final String? imagePath;
   final String label;
   final bool isLogin;
+  final void Function()? onPress;
 
   const CustomLoginButton({
     super.key,
     this.imagePath,
     required this.label,
     this.isLogin = false,
+    this.onPress,
   });
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: onPress,
       style: ElevatedButton.styleFrom(
         backgroundColor: isLogin ? Colors.blue : Colors.white,
         shape: RoundedRectangleBorder(

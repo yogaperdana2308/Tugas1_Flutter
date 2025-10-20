@@ -87,7 +87,12 @@ class Tugas4 extends StatelessWidget {
                     'Rp 15.000/liter',
                     style: TextStyle(fontStyle: FontStyle.italic),
                   ),
-                  trailing: Icon(Icons.keyboard_arrow_right),
+                  trailing: IconButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/lanjutan1');
+                    },
+                    icon: Icon(Icons.keyboard_arrow_right),
+                  ),
                 ),
 
                 //KOPI ABC
