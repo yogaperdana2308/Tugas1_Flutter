@@ -23,7 +23,7 @@ class _Tugas5State extends State<Tugas5> {
             counter--;
           });
         },
-        child: Icon(Icons.add),
+        child: Icon(Icons.remove),
       ),
       backgroundColor: const Color(0xffFBF9D1),
       appBar: AppBar(

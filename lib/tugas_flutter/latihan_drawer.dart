@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_d7/tugas1_flutter/latihan1.dart';
-import 'package:flutter_d7/tugas1_flutter/slicingfigma.dart';
-import 'package:flutter_d7/tugas1_flutter/tugas4.dart';
-import 'package:flutter_d7/tugas1_flutter/tugas5.dart';
+import 'package:flutter_d7/tugas_flutter/latihan1.dart';
+import 'package:flutter_d7/tugas_flutter/slicingfigma.dart';
+import 'package:flutter_d7/tugas_flutter/tugas4.dart';
+import 'package:flutter_d7/tugas_flutter/tugas5.dart';
 
 class LatihanDrawer extends StatefulWidget {
   const LatihanDrawer({super.key});
@@ -38,6 +38,7 @@ class _LatihanDrawerState extends State<LatihanDrawer> {
         backgroundColor: Color(0xff9A3F3F),
       ),
       drawer: Drawer(
+        backgroundColor: Colors.blue,
         child: ListView.builder(
           itemCount: _widgetOptions.length,
           itemBuilder: (context, index) {

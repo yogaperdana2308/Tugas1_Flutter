@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_d7/tugas1_flutter/lanjutan_latihan1.dart';
-import 'package:flutter_d7/tugas1_flutter/latihan1.dart';
-import 'package:flutter_d7/tugas1_flutter/latihan_drawer.dart';
-import 'package:flutter_d7/tugas1_flutter/tugas4.dart';
-import 'package:flutter_d7/tugas1_flutter/tugas5.dart';
+import 'package:flutter_d7/tugas_flutter/tugas9_drawer.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
-void main() {
+void main() async {
+  await initializeDateFormatting('id_ID', null);
   runApp(const MyApp());
 }
 
@@ -14,17 +12,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      routes: {
-        '/latihan1': (context) => Latihan1(),
-        '/tugas4': (context) => Tugas4(),
-        '/tugas5': (context) => Tugas5(),
-        '/lanjutan1': (context) => LanjutanLatihan1(),
-      },
-      title: 'drawer',
+      // routes: {
+      //   '/latihan1': (context) => Latihan1(),
+      //   '/tugas4': (context) => Tugas4(),
+      //   '/tugas5': (context) => Tugas5(),
+      //   '/lanjutan1': (context) => LanjutanLatihan1(),
+      // },
+      title: 'Tugas 9',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.greenAccent),
       ),
-      home: LatihanDrawer(),
+      home: Tugas9Drawer(),
     );
   }
 }

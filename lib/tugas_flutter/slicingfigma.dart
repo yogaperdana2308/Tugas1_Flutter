@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_d7/tugas1_flutter/custom_login_button.dart';
-import 'package:flutter_d7/tugas1_flutter/input_akun.dart';
+import 'package:flutter_d7/tugas_flutter/custom_login_button.dart';
+import 'package:flutter_d7/tugas_flutter/input_akun.dart';
 
 class Slicingfigma extends StatefulWidget {
   const Slicingfigma({super.key});
@@ -49,7 +49,7 @@ class _SlicingfigmaState extends State<Slicingfigma> {
                 ),
                 SizedBox(height: 26),
                 Container(
-                  height: 612,
+                  height: 650,
                   width: 327,
                   padding: EdgeInsets.all(24),
                   decoration: BoxDecoration(
@@ -179,30 +179,49 @@ class _SlicingfigmaState extends State<Slicingfigma> {
                           ),
                         ],
                       ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Dont have an account?',
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                          TextButton(
+                            onPressed: () {},
+                            child: Text(
+                              'Sign Up',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12,
+                                color: Color(0xFF4D81E7),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                 ),
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Dont have an account?',
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                    TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        'Sign Up',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 12,
-                          color: Color(0xFF4D81E7),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: [
+                //     Text(
+                //       'Dont have an account?',
+                //       style: TextStyle(color: Colors.grey),
+                //     ),
+                //     TextButton(
+                //       onPressed: () {},
+                //       child: Text(
+                //         'Sign Up',
+                //         style: TextStyle(
+                //           fontWeight: FontWeight.bold,
+                //           fontSize: 12,
+                //           color: Color(0xFF4D81E7),
+                //         ),
+                //       ),
+                //     ),
+                //   ],
+                // ),
               ],
             ),
           ),

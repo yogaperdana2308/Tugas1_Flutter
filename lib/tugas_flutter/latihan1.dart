@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_d7/tugas1_flutter/custom_login_button.dart';
+import 'package:flutter_d7/tugas_flutter/custom_login_button.dart';
 
 class Latihan1 extends StatefulWidget {
   const Latihan1({super.key});
