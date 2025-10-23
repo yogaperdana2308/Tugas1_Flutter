@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_d7/tugas_flutter/tugas9_drawer.dart';
+import 'package:flutter_d7/tugas_flutter/tugas10.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 void main() async {
@@ -18,11 +18,11 @@ class MyApp extends StatelessWidget {
       //   '/tugas5': (context) => Tugas5(),
       //   '/lanjutan1': (context) => LanjutanLatihan1(),
       // },
-      title: 'Tugas 9',
+      title: 'Tugas 10',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.greenAccent),
       ),
-      home: Tugas9Drawer(),
+      home: Tugas10(),
     );
   }
 }

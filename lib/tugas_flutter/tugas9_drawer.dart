@@ -4,7 +4,8 @@ import 'package:flutter_d7/tugas_flutter/tugas9b.dart';
 import 'package:flutter_d7/tugas_flutter/tugas9c.dart';
 
 class Tugas9Drawer extends StatefulWidget {
-  const Tugas9Drawer({super.key});
+  const Tugas9Drawer({super.key, required this.email});
+  final email;
 
   @override
   State<Tugas9Drawer> createState() => _Tugas9DrawerState();

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_d7/tugas_flutter/tugas7(sk).dart';
+import 'package:flutter_d7/tugas_flutter/tugas7_sk.dart';
 
 class Tugas7Drawer extends StatefulWidget {
   const Tugas7Drawer({super.key});

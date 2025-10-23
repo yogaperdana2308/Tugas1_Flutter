@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_d7/tugas_flutter/tugas7(drawer).dart';
+import 'package:flutter_d7/tugas_flutter/tugas7_drawer.dart';
 import 'package:intl/intl.dart';
 
 // ~~~~ CHECK BOX ~~~~
