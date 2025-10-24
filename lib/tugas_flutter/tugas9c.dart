@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_d7/constant/perabot_image.dart';
-import 'package:flutter_d7/extension/rupiah.dart';
 import 'package:flutter_d7/models/perabot_model.dart';
+import 'package:flutter_d7/tugas_flutter/extension/rupiah.dart';
 
 // NOMOR 3
 class Tugas9 extends StatefulWidget {
