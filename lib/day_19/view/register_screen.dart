@@ -13,9 +13,12 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController usernameController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController emailC = TextEditingController();
+  final TextEditingController usernameC = TextEditingController();
+  final TextEditingController passwordC = TextEditingController();
+  final TextEditingController nomorhpC = TextEditingController();
+  final TextEditingController priceC = TextEditingController();
+  final TextEditingController barangC = TextEditingController();
   bool isVisibility = false;
   @override
   Widget build(BuildContext context) {
@@ -45,7 +48,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 height(12),
                 buildTextField(
                   hintText: "Enter your username",
-                  controller: usernameController,
+                  controller: usernameC,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return "Username tidak boleh kosong";
@@ -59,7 +62,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 height(12),
                 buildTextField(
                   hintText: "Enter your email",
-                  controller: emailController,
+                  controller: emailC,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return "Email tidak boleh kosong";
@@ -80,12 +83,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 buildTextField(
                   hintText: "Enter your password",
                   isPassword: true,
-                  controller: passwordController,
+                  controller: passwordC,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return "Password tidak boleh kosong";
                     } else if (value.length < 6) {
                       return "Password minimal 6 karakter";
+                    }
+                    return null;
+                  },
+                ),
+                height(16),
+                buildTitle("No. HP"),
+                height(12),
+                buildTextField(
+                  hintText: "No. HP",
+                  controller: nomorhpC,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "No. HP tidak boleh kosong";
+                    } else if (value.length < 6) {
+                      return "No. HP minimal 6 karakter";
                     }
                     return null;
                   },
@@ -96,15 +114,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   label: "Register",
                   onPress: () {
                     if (_formKey.currentState!.validate()) {
-                      print(emailController.text);
+                      print(emailC.text);
                       final UserModel data = UserModel(
-                        email: emailController.text,
-                        username: usernameController.text,
-                        password: passwordController.text,
+                        email: emailC.text,
+                        username: usernameC.text,
+                        password: passwordC.text,
+                        nomorhp: nomorhpC.text,
                       );
                       DbHelper.registerUser(data);
                       Fluttertoast.showToast(msg: "Register Berhasil");
-                      Navigator.pop(context);
+                      Navigator.pushNamed(context, '/login_screen');
                     } else {}
                   },
                 ),

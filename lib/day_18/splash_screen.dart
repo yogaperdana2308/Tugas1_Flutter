@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_d7/constant/perabot_image.dart';
 import 'package:flutter_d7/day_18/drawer.dart';
+import 'package:flutter_d7/day_18/latihan_login.dart';
 import 'package:flutter_d7/day_18/splash_screen_handler.dart';
-import 'package:flutter_d7/day_18/tugas10.dart';
 
 class SplashScreenDay18 extends StatefulWidget {
   const SplashScreenDay18({super.key});

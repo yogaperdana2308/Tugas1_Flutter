@@ -11,18 +11,10 @@ class DbHelper {
       join(dbPath, 'ppkd.db'),
       onCreate: (db, version) async {
         await db.execute(
-          "CREATE TABLE $tableUser(id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, email TEXT, password TEXT)",
+          "CREATE TABLE $tableUser(id INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT, password TEXT, username TEXT, nomorhp TEXT)",
         );
       },
-      onUpgrade: (db, oldVersion, newVersion) async {
-        if (newVersion == 2) {
-          await db.execute(
-            "CREATE TABLE $tableItems(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, email TEXT, class TEXT, age int)",
-          );
-        }
-      },
-
-      version: 2,
+      version: 1,
     );
   }
 
@@ -48,6 +40,9 @@ class DbHelper {
       where: 'email = ? AND password = ?',
       whereArgs: [email, password],
     );
+    final List<Map<String, dynamic>> check = await dbs.query(tableUser);
+
+    print(check);
     if (results.isNotEmpty) {
       return UserModel.fromMap(results.first);
     }
@@ -55,21 +50,21 @@ class DbHelper {
   }
 
   //MENAMBAHKAN BARANG
-  static Future<void> createItems(UserModel items) async {
-    final dbs = await db();
-    //Insert adalah fungsi untuk menambahkan data (CREATE)
-    await dbs.insert(
-      tableItems,
-      items.toMap(),
-      conflictAlgorithm: ConflictAlgorithm.replace,
-    );
-    print(items.toMap());
-  }
+  // static Future<void> createItems(UserModel items) async {
+  //   final dbs = await db();
+  //   //Insert adalah fungsi untuk menambahkan data (CREATE)
+  //   await dbs.insert(
+  //     tableItems,
+  //     items.toMap(),
+  //     conflictAlgorithm: ConflictAlgorithm.replace,
+  //   );
+  //   print(items.toMap());
+  // }
 
   //GET PENGGUNA
-  static Future<List<UserModel>> gettAllItems() async {
+  static Future<List<UserModel>> gettAllUser() async {
     final dbs = await db();
-    final List<Map<String, dynamic>> results = await dbs.query(tableItems);
+    final List<Map<String, dynamic>> results = await dbs.query(tableUser);
     print(results.map((e) => UserModel.fromMap(e)).toList());
     return results.map((e) => UserModel.fromMap(e)).toList();
   }

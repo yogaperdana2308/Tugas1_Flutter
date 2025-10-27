@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_d7/day_18/latihan_login.dart';
+import 'package:flutter_d7/day_19/view/create_items.dart';
 import 'package:flutter_d7/day_19/view/login_screen.dart';
+import 'package:flutter_d7/day_19/view/register_screen.dart';
+import 'package:flutter_d7/tugas_flutter/lanjutan_latihan1.dart';
+import 'package:flutter_d7/tugas_flutter/latihan1.dart';
+import 'package:flutter_d7/tugas_flutter/tugas4.dart';
+import 'package:flutter_d7/tugas_flutter/tugas5.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 void main() async {
@@ -12,17 +19,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // routes: {
-      //   '/latihan1': (context) => Latihan1(),
-      //   '/tugas4': (context) => Tugas4(),
-      //   '/tugas5': (context) => Tugas5(),
-      //   '/lanjutan1': (context) => LanjutanLatihan1(),
-      // },
+      routes: {
+        '/latihan1': (context) => Latihan1(),
+        '/tugas4': (context) => Tugas4(),
+        '/tugas5': (context) => Tugas5(),
+        '/lanjutan1': (context) => LanjutanLatihan1(),
+        '/login_screen': (context) => LoginScreen(),
+        '/register_screen': (context) => RegisterScreen(),
+        '/create_items': (context) => CRItems(),
+      },
       title: 'Register Screen',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.greenAccent),
       ),
-      home: LoginScreen(),
+      home: LatihanLogin(),
     );
   }
 }

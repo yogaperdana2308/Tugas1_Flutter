@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_d7/day_18/splash_screen_handler.dart';
+import 'package:flutter_d7/day_19/database/db_helper.dart';
+import 'package:flutter_d7/day_19/view/create_items.dart';
 import 'package:flutter_d7/tugas_flutter/custom_login_button.dart';
-import 'package:flutter_d7/tugas_flutter/input_akun.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -13,6 +16,13 @@ class _LoginScreenState extends State<LoginScreen> {
   bool buttonAll = false;
   bool box = false;
   bool obscurePass = true;
+  final _formKey = GlobalKey<FormState>();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  bool isPassword = true;
+  bool isVisibility = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -106,31 +116,64 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ],
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(height: 24),
-                          Text('Email'),
-                          SizedBox(height: 2),
-                          InputAkun(input: 'Email'),
-                          SizedBox(height: 24),
-                          Text('Password'),
-                          SizedBox(height: 2),
-                          InputAkun(
-                            isPassword: true,
-                            input: 'Password',
-                            lambang: Icon(
-                              Icons.visibility_off_rounded,
-                              size: 16,
+                      Form(
+                        key: _formKey,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(height: 24),
+                            TextFormField(
+                              controller: emailController,
+                              decoration: InputDecoration(
+                                label: Text('Email'),
+                                hintText: 'Email',
+                              ),
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return "Email tidak boleh kosong";
+                                } else if (!value.contains('@')) {
+                                  return "Email tidak valid";
+                                } else if (!RegExp(
+                                  r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$",
+                                ).hasMatch(value)) {
+                                  return "Format Email tidak valid";
+                                }
+                                return null;
+                              },
                             ),
-                            obscurePass: obscurePass,
-                            whenPress: () {
-                              setState(() {
-                                obscurePass = !obscurePass;
-                              });
-                            },
-                          ),
-                        ],
+                            SizedBox(height: 24),
+                            TextFormField(
+                              controller: passwordController,
+                              obscureText: isPassword ? isVisibility : false,
+                              decoration: InputDecoration(
+                                label: Text('Password'),
+                                suffixIcon: isPassword
+                                    ? IconButton(
+                                        onPressed: () {
+                                          setState(() {
+                                            isVisibility = !isVisibility;
+                                          });
+                                        },
+                                        icon: Icon(
+                                          isVisibility
+                                              ? Icons.visibility_off
+                                              : Icons.visibility,
+                                        ),
+                                      )
+                                    : null,
+                              ),
+
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return "Password tidak boleh kosong";
+                                } else if (value.length < 6) {
+                                  return "Password minimal 6 karakter";
+                                }
+                                return null;
+                              },
+                            ),
+                          ],
+                        ),
                       ),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -172,9 +215,55 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           CustomLoginButton(
                             label: 'LOGIN',
+
                             isLogin: true,
-                            onPress: () {
-                              Navigator.pushNamed(context, '/latihan1');
+                            onPress: () async {
+                              if (_formKey.currentState!.validate()) {
+                                print(emailController.text);
+                                PreferenceHandler.saveLogin(true);
+
+                                final data = await DbHelper.loginUser(
+                                  email: emailController.text,
+                                  password: passwordController.text,
+                                );
+                                print(data?.toJson());
+                                if (data != null) {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => CRItems(),
+                                    ),
+                                  );
+                                } else {
+                                  Fluttertoast.showToast(
+                                    msg: "Email atau password salah",
+                                  );
+                                }
+                              } else {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      title: Text("Validation Error"),
+                                      content: Text("Please fill all fields"),
+                                      actions: [
+                                        TextButton(
+                                          child: Text("OK"),
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                        ),
+                                        TextButton(
+                                          child: Text("Batalkan"),
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              }
                             },
                           ),
                         ],
@@ -188,7 +277,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           TextButton(
                             onPressed: () {
-                              Navigator.pushNamed(context, '\register_scrreen');
+                              Navigator.pushNamed(context, '/register_screen');
                             },
                             child: Text(
                               'Sign Up',
