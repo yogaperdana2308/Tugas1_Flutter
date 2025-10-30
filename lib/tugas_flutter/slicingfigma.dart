@@ -112,13 +112,15 @@ class _SlicingfigmaState extends State<Slicingfigma> {
                           SizedBox(height: 24),
                           Text('Email'),
                           SizedBox(height: 2),
-                          InputAkun(input: 'Email'),
+                          InputAkun(input: 'Email', icon: Icons.email_outlined),
+
                           SizedBox(height: 24),
                           Text('Password'),
                           SizedBox(height: 2),
                           InputAkun(
                             isPassword: true,
                             input: 'Password',
+                            icon: Icons.key_off_outlined,
                             lambang: Icon(
                               Icons.visibility_off_rounded,
                               size: 16,

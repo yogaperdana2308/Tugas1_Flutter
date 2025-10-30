@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_d7/E-Nventory/view/login_screen.dart';
 import 'package:flutter_d7/day_19/view/login_screen.dart';
-import 'package:flutter_d7/day_19/view/register_screen.dart';
 // import 'package:flutter_d7/day_21/view/create_items.dart';
 // import 'package:flutter_d7/day_21/view/login_screen.dart';
 // import 'package:flutter_d7/day_21/view/register_screen.dart';
@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.greenAccent),
       ),
-      home: RegisterScreen(),
+      home: LoginScreenProject(),
     );
   }
 }

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class CustomLoginButton extends StatelessWidget {
+class LoginButton extends StatelessWidget {
   final String? imagePath;
   final String label;
   final bool isLogin;
   final void Function()? onPress;
 
-  const CustomLoginButton({
+  const LoginButton({
     super.key,
     this.imagePath,
     required this.label,
@@ -19,7 +19,9 @@ class CustomLoginButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPress,
       style: ElevatedButton.styleFrom(
-        backgroundColor: isLogin ? Color(0xffCBDCEB) : Colors.white,
+        backgroundColor: isLogin
+            ? Color.fromARGB(255, 165, 200, 230)
+            : Colors.white,
         shape: RoundedRectangleBorder(
           side: BorderSide(color: const Color.fromARGB(255, 216, 216, 216)),
           borderRadius: BorderRadius.circular(10),
