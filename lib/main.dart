@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_d7/E-Nventory/view/login_screen.dart';
+import 'package:flutter_d7/API_day31/view/splash_screen.dart';
+// import 'package:flutter_d7/E-Nventory/view/login_screen.dart';
+// import 'package:flutter_d7/E-Nventory/view/register_screen.dart';
 import 'package:flutter_d7/day_19/view/login_screen.dart';
 // import 'package:flutter_d7/day_21/view/create_items.dart';
 // import 'package:flutter_d7/day_21/view/login_screen.dart';
@@ -26,14 +28,15 @@ class MyApp extends StatelessWidget {
         '/tugas5': (context) => Tugas5(),
         '/lanjutan1': (context) => LanjutanLatihan1(),
         '/login_screen': (context) => LoginScreen(),
-        // '/register_screen': (context) => RegisterScreenday21(),
-        // '/create_items': (context) => CRItemsday21(),
+
+        // '/register_screen': (context) => RegisterScreenProject(),
+        // '/login_screen': (context) => LoginScreenProject(),
       },
-      title: 'Register Screen',
+      title: 'E-Nventory',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.greenAccent),
       ),
-      home: LoginScreenProject(),
+      home: SplashScreen(),
     );
   }
 }
