@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_d7/API_day31/model/cat_model.dart';
 import 'package:flutter_d7/API_day31/service/api.dart';
+import 'package:flutter_d7/API_day31/view/detail_cat.dart';
 
 class CatScreen extends StatefulWidget {
   const CatScreen({super.key});
@@ -11,6 +12,11 @@ class CatScreen extends StatefulWidget {
 
 class _CatScreenState extends State<CatScreen> {
   late Future<List<CatModel>> _futureCat;
+
+  List<CatModel> _originalCats = [];
+  List<CatModel> _filteredCats = [];
+
+  final TextEditingController _searchController = TextEditingController();
 
   @override
   void initState() {
@@ -24,133 +30,179 @@ class _CatScreenState extends State<CatScreen> {
     });
   }
 
+  void _search(String query) {
+    if (query.isEmpty) {
+      setState(() => _filteredCats = _originalCats);
+    } else {
+      setState(() {
+        _filteredCats = _originalCats
+            .where((cat) => cat.id!.toLowerCase().contains(query.toLowerCase()))
+            .toList();
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffFFF5F9),
+      backgroundColor: const Color(0xffF5F7FA),
       appBar: AppBar(
-        backgroundColor: const Color(0xffFF8FB7),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
         title: const Text(
-          "🐱 Galeri Kucing",
+          "Cat Gallery",
           style: TextStyle(
+            color: Colors.black87,
+            fontSize: 28,
             fontWeight: FontWeight.bold,
-            color: Colors.white,
-            fontSize: 20,
           ),
         ),
         centerTitle: true,
-        elevation: 2,
       ),
-      body: FutureBuilder<List<CatModel>>(
-        future: _futureCat,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(color: Color(0xffFF8FB7)),
-            );
-          } else if (snapshot.hasError) {
-            return Center(
-              child: Text(
-                "Terjadi kesalahan: ${snapshot.error}",
-                style: const TextStyle(color: Colors.red),
-              ),
-            );
-          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(child: Text("Tidak ada data"));
-          }
 
-          final cats = snapshot.data!;
-
-          return RefreshIndicator(
-            color: const Color(0xffFF8FB7),
-            onRefresh: _refresh,
-            child: ListView.builder(
-              padding: const EdgeInsets.all(10),
-              itemCount: cats.length,
-              itemBuilder: (context, index) {
-                final cat = cats[index];
-                return Card(
-                  margin: const EdgeInsets.symmetric(vertical: 10),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
+      body: Column(
+        children: [
+          // 🔍 Search Bar Premium Style
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(18),
+                boxShadow: [
+                  BoxShadow(
+                    blurRadius: 12,
+                    offset: const Offset(0, 4),
+                    color: Colors.black.withOpacity(0.05),
                   ),
-                  elevation: 5,
-                  shadowColor: Colors.pink.shade100,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      ClipRRect(
-                        borderRadius: const BorderRadius.vertical(
-                          top: Radius.circular(16),
-                        ),
-                        child: Image.network(
-                          cat.url ?? '',
-                          height: 220,
-                          width: double.infinity,
-                          fit: BoxFit.cover,
-                          loadingBuilder: (context, child, progress) {
-                            if (progress == null) return child;
-                            return Container(
-                              height: 220,
-                              color: Colors.pink.shade50,
-                              child: const Center(
-                                child: CircularProgressIndicator(
-                                  color: Color(0xffFF8FB7),
-                                ),
-                              ),
-                            );
-                          },
-                          errorBuilder: (context, error, stackTrace) {
-                            return Container(
-                              height: 220,
-                              color: Colors.grey.shade200,
-                              child: const Icon(
-                                Icons.broken_image,
-                                color: Colors.grey,
-                                size: 60,
-                              ),
-                            );
-                          },
-                        ),
-                      ),
+                ],
+              ),
+              child: TextField(
+                controller: _searchController,
+                onChanged: _search,
+                decoration: InputDecoration(
+                  hintText: "Search by ID...",
+                  prefixIcon: const Icon(Icons.search, color: Colors.grey),
+                  border: InputBorder.none,
+                  contentPadding: const EdgeInsets.all(14),
+                ),
+              ),
+            ),
+          ),
 
-                      Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "ID: ${cat.id ?? '-'}",
-                              style: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                              ),
+          Expanded(
+            child: FutureBuilder<List<CatModel>>(
+              future: _futureCat,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(
+                    child: CircularProgressIndicator(color: Colors.pink),
+                  );
+                }
+
+                if (snapshot.hasError) {
+                  return Center(child: Text("Error: ${snapshot.error}"));
+                }
+
+                if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                  return const Center(child: Text("Tidak ada data"));
+                }
+
+                _originalCats = snapshot.data!;
+                _filteredCats = _filteredCats.isEmpty
+                    ? _originalCats
+                    : _filteredCats;
+
+                return RefreshIndicator(
+                  onRefresh: _refresh,
+                  color: Colors.pink,
+                  child: GridView.builder(
+                    padding: const EdgeInsets.all(16),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          childAspectRatio: 0.75,
+                          crossAxisSpacing: 16,
+                          mainAxisSpacing: 16,
+                        ),
+
+                    itemCount: _filteredCats.length,
+                    itemBuilder: (context, index) {
+                      final cat = _filteredCats[index];
+
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => DetailCatScreen(cat: cat),
                             ),
-                            SizedBox(height: 4),
-                            Wrap(
-                              children: [
-                                const Icon(
-                                  Icons.link,
-                                  size: 16,
-                                  color: Colors.blue,
-                                ),
-                                SizedBox(width: 8),
-                                Text(
-                                  'URL : ${cat.url ?? ''}',
-                                  style: TextStyle(fontSize: 12),
+                          );
+                        },
+                        child: Hero(
+                          tag: cat.id!,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                  blurRadius: 14,
+                                  offset: const Offset(0, 6),
+                                  color: Colors.black.withOpacity(0.07),
                                 ),
                               ],
                             ),
-                          ],
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: Stack(
+                                children: [
+                                  Positioned.fill(
+                                    child: Image.network(
+                                      cat.url!,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+
+                                  // ID label floating
+                                  Positioned(
+                                    bottom: 0,
+                                    left: 0,
+                                    right: 0,
+                                    child: Container(
+                                      padding: const EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                        gradient: LinearGradient(
+                                          colors: [
+                                            Colors.black.withOpacity(0.6),
+                                            Colors.transparent,
+                                          ],
+                                          begin: Alignment.bottomCenter,
+                                          end: Alignment.topCenter,
+                                        ),
+                                      ),
+                                      child: Text(
+                                        "ID: ${cat.id}",
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
-                    ],
+                      );
+                    },
                   ),
                 );
               },
             ),
-          );
-        },
+          ),
+        ],
       ),
     );
   }
